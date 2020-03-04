@@ -31,32 +31,56 @@
                 camera.aspect = width/height;
                 camera.updateProjectionMatrix();
             });
+			
+			const color = 0xFFFFFF;
+			const intensity = 1;
+			const light = new THREE.DirectionalLight(color, intensity);
+			light.position.set(-1, 2, 4);
+			scene.add(light);
 
-            var geometry = new THREE.BoxGeometry(1,1,1);
-			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe:true} );
-			var cube = new THREE.Mesh( geometry, material );
-			scene.add( cube );
+            var geometry1 = new THREE.BoxGeometry(1,1,1);
+			var material1 = new THREE.MeshPhongMaterial( { color: 0x00ff00} );
+			var cube1 = new THREE.Mesh( geometry1, material1 );
+			scene.add( cube1 );
 
-            
+			var geometry2 = new THREE.BoxGeometry(3,3,3);
+			var material2 = new THREE.MeshPhongMaterial( { color: 0x00fff0, wireframe:true} );
+			var cube2 = new THREE.Mesh( geometry2, material2 );
+			scene.add( cube2 );
 
-			camera.position.z = 3;
-            
+			var loader = new THREE.ObjectLoader();
 
-            //camera.position.set( 0, 20, 10 );
-            //controls.update();
-            
+			var obj = loader.load(
+				// resource URL
+				"models/json/standard-male-figure.json",
+
+				// onLoad callback
+				// Here the loaded data is assumed to be an object
+				function ( obj ) {
+					// Add the loaded object to the scene
+					scene.add( obj );
+				},
+			);
+
+
+			
+			//camera.position.z = 100;
+			
 			
 			var update= function () {
 				requestAnimationFrame( update );
 
-				cube.rotation.x += 0.01;
-				cube.rotation.y += 0.01;
+				cube1.rotation.x += 0.01;
+				cube1.rotation.y += 0.01;
+
+				cube2.rotation.x += 0.02;
+				cube2.rotation.y += 0.01;
 
 				renderer.render( scene, camera );
 			};
-			
 
 			update();
+			
 		</script>
 	</body>
 </html>
