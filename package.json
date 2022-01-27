@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/Zachery2008/webgl#readme",
   "dependencies": {
-    "three": "^0.114.0"
+    "three": "^0.137.0"
   }
 }
